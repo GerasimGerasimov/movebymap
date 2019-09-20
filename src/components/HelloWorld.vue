@@ -5,6 +5,10 @@
         :style="{ backgroundImage: `url(${src})` }">
         CTRL-C, CTRL-V сюда файлы
       </div>
+    <div v-for="(uri) of imagesURI" :key="uri">
+      <img class="image" :src="uri" alt="" v-on:click="onShowFullSize">
+      {{uri}}
+    </div>
   </div>
 </template>
 
@@ -15,6 +19,11 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
 export default class HelloWorld extends Vue {
   @Prop() private msg!: string;
   private src: string = "";
+  private imagesURI: Array<string> = [];
+
+  private onShowFullSize():void {
+
+  }
 
   private onPaste(e: any): void {
     console.log(e.clipboardData);
@@ -25,14 +34,15 @@ export default class HelloWorld extends Vue {
         console.log(blob);
         // создаем временный урл объекта
         let URLObj = window.URL;
-        let source = URLObj.createObjectURL(blob);  
+        let source = URLObj.createObjectURL(blob);
+        this.imagesURI.push(source);  
         this.src = source;              
         // добавляем картинку в DOM
-        let pastedImage = new Image();
-        pastedImage.onload = function(){
-
-        }
-        pastedImage.src = source;
+        //let pastedImage = new Image();
+        //pastedImage.onload = function(){
+//
+        //}
+        //pastedImage.src = source;
       }
     }
   }
@@ -67,5 +77,11 @@ a {
   height: 200px;
   background-size: contain;
   background: no-repeat;
+}
+
+.image {
+  height: 100px;
+  width: 100px;
+  border: 1px solid red;
 }
 </style>

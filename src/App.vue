@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <BannerView msg="тут будут баннеры"/>
     <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
   </div>
 </template>
@@ -7,10 +8,12 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import HelloWorld from './components/HelloWorld.vue';
+import BannerView from './components/BannerView.vue';
 
 @Component({
   components: {
     HelloWorld,
+    BannerView,
   },
 })
 export default class App extends Vue {}
