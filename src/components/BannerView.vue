@@ -2,7 +2,7 @@
   <div class="banners">
     <transition-group tag="div" class="img-slider" name="slide">
       <div v-for="number in uriIndex" :key="number">
-          <img :src="images[number]" alt="">
+          <img :src="images[uriIndex % images.length]" alt="">
       </div>
     </transition-group>
   </div>
@@ -11,6 +11,9 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
 
+/*
+
+*/
 @Component
 export default class BannerView extends Vue {
   @Prop() private msg!: string;
@@ -30,8 +33,9 @@ export default class BannerView extends Vue {
   }
   
   private update(): void {
-    if (++this.uriIndex >= this.images.length) this.uriIndex = 0;
-    this.uri = this.images[this.uriIndex]; 
+    this.uriIndex++;
+    //if (++this.uriIndex >= this.images.length) this.uriIndex = 0;
+    //this.uri = this.images[this.uriIndex]; 
     setTimeout(this.update, 1500);
   }
 }
@@ -42,6 +46,7 @@ export default class BannerView extends Vue {
     border: 1px dashed royalblue;
     width: 100%;
     height: 200px;
+    overflow: hidden;
 }
 
 .banners-image {
@@ -55,16 +60,18 @@ export default class BannerView extends Vue {
 }
 .slide-enter {
   transform: translate(100%, 0);
+  filter: blur(25px);
 }
 .slide-leave-to {
   transform: translate(-100%, 0);
+  filter: blur(25px);
 }
 
 .img-slider{
   overflow: hidden;
   position: relative;
-  height: 200px;
-  width: 400px;
+  height: 100%;
+  width: 100%;
 }
 
 .img-slider img {
