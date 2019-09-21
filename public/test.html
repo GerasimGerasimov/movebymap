@@ -23,6 +23,8 @@
         
         function AnimationIteration(){
             console.log('AnimationIteration:'+elNext.className);
+            elNext.style.animationPlayState = "paused";
+            elPrev.style.animationPlayState = "paused";            
             if (elNext.className === "next") {
                 elNext.className = "prev";
                 elPrev.className = "next";
@@ -30,7 +32,10 @@
                 elNext.className = "next";
                 elPrev.className = "prev";
             }
-
+            setTimeout(()=>{
+                elNext.style.animationPlayState = "running";
+                elPrev.style.animationPlayState = "running";
+            }, 2000);
         }
     </script>
 </body>
