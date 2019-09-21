@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <link rel="stylesheet" type="text/css" href="test.css">
+</head>
+<body>
+    <div class="wrapper">
+        <img class="prev" id="prev" src="./banners/011.jpg" alt="">
+        <img class="next" id="next" src="./banners/012.jpg" alt="">         
+    </div>   
+    <!--
+                <div class="prev" >PREV</div>
+        <div class="next" id="next">NEXT</div>
+
+    -->
+    <script>
+        const elPrev = document.getElementById("prev");//массив элементов
+        const elNext = document.getElementById("next");//массив элементов
+        //const element = elements[0];//выбираю первый
+        elNext.addEventListener("animationiteration", AnimationIteration, false);
+        
+        function AnimationIteration(){
+            console.log('AnimationIteration:'+elNext.className);
+            if (elNext.className === "next") {
+                elNext.className = "prev";
+                elPrev.className = "next";
+            } else {
+                elNext.className = "next";
+                elPrev.className = "prev";
+            }
+
+        }
+    </script>
+</body>

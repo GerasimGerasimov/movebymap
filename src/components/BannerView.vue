@@ -1,10 +1,11 @@
 <template>
   <div class="banners">
-    <transition-group tag="div" class="img-slider" name="slide">
-      <div v-for="number in uriIndex" :key="number">
-          <img :src="images[uriIndex % images.length]" alt="">
-      </div>
-    </transition-group>
+    <transition-group name="slide" >
+    <div class="slider" v-for="uri in images"
+          :key="uri"
+          :style="{ backgroundImage: `url(${uri})` }">
+    </div>
+    </transition-group>  
   </div>
 </template>
 
@@ -12,14 +13,15 @@
 import { Component, Prop, Vue } from 'vue-property-decorator';
 
 /*
-
+      <div v-for="uri in images" :key="uri">
+          <img :src="uri" alt="">
+      </div>
 */
 @Component
 export default class BannerView extends Vue {
   @Prop() private msg!: string;
   private images: Array<string> = [ './banners/011.jpg',
-                                    './banners/012.jpg',
-                                    './banners/013.jpg'];
+                                    './banners/012.jpg'];
   private uriIndex: number = 0;
   private uri: string = "";
 
@@ -33,10 +35,12 @@ export default class BannerView extends Vue {
   }
   
   private update(): void {
-    this.uriIndex++;
+    //console.log("update");
+    this.images = this.images.concat(this.images.splice(0, this.images.length - 1));
+    //console.log(this.images);
     //if (++this.uriIndex >= this.images.length) this.uriIndex = 0;
     //this.uri = this.images[this.uriIndex]; 
-    setTimeout(this.update, 1500);
+    setTimeout(this.update, 2000);
   }
 }
 </script>
@@ -54,26 +58,37 @@ export default class BannerView extends Vue {
     height: 100%;
 }
 
+/*
 .slide-leave-active,
 .slide-enter-active {
   transition: 1s;
 }
 .slide-enter {
   transform: translate(100%, 0);
-  filter: blur(25px);
 }
 .slide-leave-to {
   transform: translate(-100%, 0);
-  filter: blur(25px);
+}*/
+
+.slide-enter-active {
+  transition: 1s;
+}
+.slide-enter {
+  /*transform: translate(-100%, 0);*/
 }
 
-.img-slider{
+.slide-enter-to {
+  transform: translate(-100%, 0);
+}
+
+.slider{
   overflow: hidden;
   position: relative;
   height: 100%;
   width: 100%;
 }
 
+/*
 .img-slider img {
   position: absolute;
   top: 0;
@@ -81,5 +96,5 @@ export default class BannerView extends Vue {
   bottom: 0;
   right:0;
 }
-
+*/
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <BannerView msg="тут будут баннеры"/>
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+    <!-- <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/> -->
   </div>
 </template>
 
