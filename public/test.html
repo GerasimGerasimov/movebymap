@@ -7,30 +7,39 @@
 </head>
 <body>
     <div class="wrapper">
-        <img class="prev" id="prev" src="./banners/011.jpg" alt="">
-        <img class="next" id="next" src="./banners/012.jpg" alt="">         
+        <img class="prev" id="prev" src="" alt="">
+        <img class="next" id="next" src="" alt="">         
     </div>   
-    <!--
-                <div class="prev" >PREV</div>
-        <div class="next" id="next">NEXT</div>
-
-    -->
     <script>
+        let slides = [  "./banners/011.jpg",
+                        "./banners/012.jpg",
+                        "./banners/013.jpg",
+                        "./banners/014.jpg",
+                        "./banners/015.jpg"];
         const elPrev = document.getElementById("prev");//массив элементов
         const elNext = document.getElementById("next");//массив элементов
-        //const element = elements[0];//выбираю первый
+        elPrev.src="./banners/011.jpg";
+        elNext.src="./banners/012.jpg";
         elNext.addEventListener("animationiteration", AnimationIteration, false);
-        
+
+        function getNextSlide(){
+            slides = slides.concat(slides.splice(0, slides.length - 1));
+            return slides[0] || "";
+        }
+
         function AnimationIteration(){
-            console.log('AnimationIteration:'+elNext.className);
+            let nextSlide = getNextSlide();
+            console.log('AnimationIteration:'+elNext.className,':',nextSlide);
             elNext.style.animationPlayState = "paused";
             elPrev.style.animationPlayState = "paused";            
             if (elNext.className === "next") {
                 elNext.className = "prev";
+                elPrev.src = nextSlide;
                 elPrev.className = "next";
             } else {
                 elNext.className = "next";
                 elPrev.className = "prev";
+                elNext.src = nextSlide;
             }
             setTimeout(()=>{
                 elNext.style.animationPlayState = "running";
