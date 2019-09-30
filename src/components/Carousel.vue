@@ -1,11 +1,11 @@
 <template>
   <div class="banners">
     <div class="slider">
-        <img :class="classPrev" :src="srcPrev" alt=""
-             :style="{ animationPlayState: playCtrl}">
-        <img :class="classNext" :src="srcNext" alt=""
-             :style="{ animationPlayState: playCtrl}" 
-             v-on:animationiteration = "AnimationIteration">  
+          <img :class="classPrev" :src="srcPrev" alt=""
+              :style="{ animationPlayState: playCtrl}">
+          <img :class="classNext" :src="srcNext" alt=""
+              :style="{ animationPlayState: playCtrl}" 
+              v-on:animationiteration = "AnimationIteration">       
     </div>
   </div>
 </template>
@@ -13,26 +13,34 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
 
+enum SlideShowControl {
+    run  = "running",
+    stop = "paused",
+}
+
 @Component
-export default class BannerView extends Vue {
-  @Prop() private msg!: string;
-  private slides: string[] = [
-                      './banners/011.jpg',
-                      './banners/012.jpg',
-                      './banners/013.jpg',
-                      './banners/014.jpg',
-                      './banners/015.jpg',
-                      './banners/016.jpg'];
+export default class Carousel extends Vue {
+  @Prop() private images!: string[];
+  private slides: string[] = this.images;
 
   private classPrev: string = 'prev';
   private classNext: string = 'next';
-  private srcPrev: string = './banners/011.jpg';
-  private srcNext: string = './banners/012.jpg';
-  private playCtrl: string = 'running'; // 'paused';
+  private srcPrev: string = '';
+  private srcNext: string = '';
+  private playCtrl: string = SlideShowControl.run; // 'running'; // 'paused';
+
+  constructor (){
+    super();  
+  }
+
+  mounted ():any {
+    this.srcPrev = this.getNextSlide();
+    this.srcNext = this.getNextSlide();
+  }
 
   private AnimationIteration() {
     const nextSlide: string = this.getNextSlide();
-    this.playCtrl = 'paused';
+    this.playCtrl = SlideShowControl.stop;
     if (this.classNext === 'next') {
       this.classNext = 'prev';
       this.classPrev = 'next';
@@ -43,7 +51,7 @@ export default class BannerView extends Vue {
       this.srcNext = nextSlide;
     }
     setTimeout(() => {
-      this.playCtrl = 'running';
+      this.playCtrl = SlideShowControl.run;
     }, 2000);
   }
 
@@ -70,6 +78,10 @@ export default class BannerView extends Vue {
     height: 300px;
     overflow: hidden;
     position: relative;
+    /*позиционирование по центру*/
+    display: flex;
+    justify-content: center;
+    align-items: center;    
 }
 
 @keyframes prev_animate {
