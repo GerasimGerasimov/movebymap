@@ -88,11 +88,16 @@ export default class Carousel extends Vue {
     0%   {left: 0%;}
     100% {left: -100%;}
   }
-  
+
+.prev, .next {
+  position: absolute;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+}
+
 .prev {
-    position: absolute;
     left: 0%;
-    width: 100%;
     animation: prev_animate 3s ease-in-out infinite;
 }
 
@@ -102,9 +107,7 @@ export default class Carousel extends Vue {
 }
 
 .next {
-    position: absolute;
     left: 100%;
-    width: 100%;
     animation: next_animate  3s ease-in-out infinite;
 }
 </style>
