@@ -1,7 +1,8 @@
 <template>
   <div id="app">
     <Carousel :images="slides"/>
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+    <RandomSizeCellsGrid msg="RandomSizeCellsGrid"/>
+    <HelloWorld msg="Vue.js + TypeScript"/>
   </div>
 </template>
 
@@ -9,11 +10,13 @@
 import { Component, Vue } from 'vue-property-decorator';
 import HelloWorld from './components/HelloWorld.vue';
 import Carousel from './components/Carousel.vue';
+import RandomSizeCellsGrid from './components/RandomSizeCellsGrid.vue';
 
 @Component({
   components: {
     HelloWorld,
     Carousel,
+    RandomSizeCellsGrid,
   },
 })
 export default class App extends Vue {
