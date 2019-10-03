@@ -23,7 +23,6 @@ export default class App extends Vue {
     private slides: string[] = [
       'https://shop.anseladams.com/v/vspfiles/photos/1701130110-2T.jpg',
       'https://st.depositphotos.com/1011976/2987/i/450/depositphotos_29872557-stock-photo-old-bridge-over-the-river.jpg',
-      'https://imgb.itour.ru/public/2019/07/07/11141/11141-LjBlXjcLj0DIfYJPOMT-800x540.jpg',
       './banners/014.jpg',
       './banners/015.jpg',
       './banners/016.jpg',
