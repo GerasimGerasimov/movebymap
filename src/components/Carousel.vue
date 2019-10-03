@@ -52,7 +52,7 @@ export default class Carousel extends Vue {
     }
     setTimeout(() => {
       this.playCtrl = SlideShowControl.run;
-    }, 2000);
+    }, 1000);
   }
 
   private getNextSlide(): string {
@@ -79,9 +79,10 @@ export default class Carousel extends Vue {
     overflow: hidden;
     position: relative;
     /*позиционирование по центру*/
+    /*
     display: flex;
     justify-content: center;
-    align-items: center;    
+    align-items: center;    */
 }
 
 @keyframes prev_animate {
@@ -91,11 +92,9 @@ export default class Carousel extends Vue {
 
 .prev, .next {
   position: absolute;
-  width: 100%;
-  max-width: 100%;
+  width: 100%;  
   height: auto;
 }
-
 .prev {
     left: 0%;
     animation: prev_animate 3s ease-in-out infinite;

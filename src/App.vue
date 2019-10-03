@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Carousel :images="slides"/>
-    <RandomSizeCellsGrid msg="RandomSizeCellsGrid"/>
+    <RandomSizeCellsGrid msg="RandomSizeCellsGrid:"/>
     <HelloWorld msg="Vue.js + TypeScript"/>
   </div>
 </template>
