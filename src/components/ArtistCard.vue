@@ -1,9 +1,9 @@
 // блок с одним изображением и информацие
 
 <template>
-  <div class="card">
+  <div class="artistcard">
       {{msg}}
-    <img class="card__image" :src="url" :title="url">
+    <img class="artistcard__image" :src="url" :title="url">
   </div>
   
 </template>
@@ -12,14 +12,15 @@
 import { Component, Prop, Vue } from 'vue-property-decorator';
 
 @Component
-export default class ImgCard extends Vue {
+export default class ArtistCard extends Vue {
     @Prop() private msg!: string;
     @Prop() private url!: string;
 }
 </script>
 
 <style scoped>
-.card{
+.artistcard{
+    border-radius: 50%;
     margin: 10px;
     width: 100px;
     height: 100px;
@@ -28,7 +29,7 @@ export default class ImgCard extends Vue {
     position: relative;
 }
 
-.card__image {
+.artistcard__image {
     position: absolute;
     left: 0px;
     top: 0px;

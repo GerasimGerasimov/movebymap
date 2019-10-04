@@ -1,30 +1,28 @@
-// Сетка блоков с изображениями. Блоки имеют рэндомные размеры.
-// Сетка старается оптимально заполнится блоками.
-
+//блок "Лучшие из Лучших"
 <template>
-  <div class="content">
-      <ImgCard 
+  <div class="bestArtists">
+      <ArtistCard 
         v-for="(item, index) in images"
         :item="item"
         :index="index"
         :key="index"
         :url="item"
-        :msg="`Image Card: ${item}`"/>             
+        :msg="`Artist Cards: ${item}`"/>             
   </div>
   
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
-import ImgCard from './ImgCard.vue';
+import ArtistCard from './ArtistCard.vue';
 
 @Component
 ({
   components: {
-    ImgCard
+    ArtistCard,
   },
 })
-export default class RandomSizeCellsGrid extends Vue {
+export default class BestArtists extends Vue {
     @Prop() private images!: string[];
 
   mounted ():any {
@@ -34,7 +32,7 @@ export default class RandomSizeCellsGrid extends Vue {
 </script>
 
 <style scoped>
-.content {
+.bestArtists {
     width: 100%;
     height: auto;
     border: 1px red solid;

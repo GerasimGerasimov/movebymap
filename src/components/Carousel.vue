@@ -21,7 +21,7 @@ enum SlideShowControl {
 @Component
 export default class Carousel extends Vue {
   @Prop() private images!: string[];
-  private slides: string[] = this.images;
+  private slides: string[] = this.images.slice();
 
   private classPrev: string = 'prev';
   private classNext: string = 'next';
