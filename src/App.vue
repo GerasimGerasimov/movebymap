@@ -14,6 +14,9 @@ import Carousel from './components/Carousel.vue';
 import RandomSizeCellsGrid from './components/RandomSizeCellsGrid.vue';
 import BestArtists from './components/BestArtists.vue';
 
+import { State, Action, Getter } from 'vuex-class';
+
+
 @Component({
   components: {
     HelloWorld,
