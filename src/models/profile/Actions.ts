@@ -6,6 +6,7 @@ import { RootState } from '@/store/types';
 
 export const actions: ActionTree<ProfileState, RootState> = {
     fetchData({ commit }): any {
+        console.log('Actions.ts:');
         console.log(commit);
         /*
         axios({

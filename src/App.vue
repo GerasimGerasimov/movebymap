@@ -14,7 +14,9 @@ import Carousel from './components/Carousel.vue';
 import RandomSizeCellsGrid from './components/RandomSizeCellsGrid.vue';
 import BestArtists from './components/BestArtists.vue';
 
-import { State, Action, Getter } from 'vuex-class';
+import { State, Action, Getter, Mutation } from 'vuex-class';
+import { ProfileState, User } from './models/profile/types';
+const namespace: string = 'profile';
 
 
 @Component({
@@ -26,6 +28,31 @@ import { State, Action, Getter } from 'vuex-class';
   },
 })
 export default class App extends Vue {
+    @State('profile') profile: ProfileState;
+    @Action('fetchData', { namespace }) fetchData: any;
+    @Getter('fullName', { namespace }) fullName: string;
+    @Getter('email', { namespace }) email: string;
+    @Mutation('profileLoaded', { namespace }) profileLoaded: any;
+    mounted(){
+      //вызываю Action
+      this.fetchData();
+      //МЕНЯЮ СТЕЙТ
+      //1) фоо=рмирую объект для записи
+      const payload: User = {firstName:'', lastName:'', email:'dialix@yandex.ru'};
+      //2) теперь с помощью мутации меняю его значени в сторе
+      //  2.1) правильный способ вызвать мутацию
+          this.profileLoaded(payload);
+          console.log('store:>')
+          console.log(this.$store);
+          //this.$store.commit('profileLoaded', payload)
+      //this.$store.commit('profileLoaded', payload);
+      // ЧИТАЮ СТЕЙТ
+      // 1) через Getter
+      let email = this.email;
+      console.log('email:', email);
+      email = this.$store.state.profile.user.email;
+      console.log('email:', email);
+    }
     private slides: string[] = [
       'https://shop.anseladams.com/v/vspfiles/photos/1701130110-2T.jpg',
       'https://st.depositphotos.com/1011976/2987/i/450/depositphotos_29872557-stock-photo-old-bridge-over-the-river.jpg',
