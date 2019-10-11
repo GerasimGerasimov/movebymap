@@ -15,11 +15,20 @@ import RandomSizeCellsGrid from './components/RandomSizeCellsGrid.vue';
 import BestArtists from './components/BestArtists.vue';
 
 import { State, Action, Getter, Mutation } from 'vuex-class';
+import { mapGetters, mapMutations } from 'vuex'
 import { ProfileState, User } from './models/profile/types';
 const namespace: string = 'profile';
 
 
 @Component({
+  // для того чтобы вызвать мутацию через mapMutations
+  // пришлось в @Component добавлять methods и в него
+  //...mapMutations('profile',{setEmail:'profileLoaded'})
+  // чтобы в итоге сделать вызов this.setEmail(payload);
+  // из namespace = profile
+  methods: {
+      ...mapMutations('profile',{setEmail:'profileLoaded'})
+  },
   components: {
     HelloWorld,
     Carousel,
@@ -33,6 +42,7 @@ export default class App extends Vue {
     @Getter('fullName', { namespace }) fullName: string;
     @Getter('email', { namespace }) email: string;
     @Mutation('profileLoaded', { namespace }) profileLoaded: any;
+    //private _profileLoaded:any = ...mapGetters('profile/profileLoaded')
     mounted(){
       //вызываю Action
       this.fetchData();
@@ -44,7 +54,13 @@ export default class App extends Vue {
           this.profileLoaded(payload);
           console.log('store:>')
           console.log(this.$store);
-          //this.$store.commit('profileLoaded', payload)
+      // 2.2) ещё один способ вызвать мутацию
+      //      указываю namespace в данном случае profile
+      //      и имя функции-мутации profileLoaded
+      //      'namespace/mutation'
+          this.$store.commit('profile/profileLoaded',payload);
+      // 2.3) вызов мутации через mapMutations
+          this.setEmail(payload);
       //this.$store.commit('profileLoaded', payload);
       // ЧИТАЮ СТЕЙТ
       // 1) через Getter
