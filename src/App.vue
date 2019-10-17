@@ -17,6 +17,7 @@ import BestArtists from './components/BestArtists.vue';
 import { State, Action, Getter, Mutation } from 'vuex-class';
 import { mapGetters, mapMutations } from 'vuex'
 import { ProfileState, User } from './models/profile/types';
+import MainPageImagesController from './controllers/MainPageImages/MainPageImagesController';
 const namespace: string = 'profile';
 
 
@@ -43,8 +44,20 @@ export default class App extends Vue {
     @Getter('email', { namespace }) email: string;
     @Mutation('profileLoaded', { namespace }) profileLoaded: any;
     //private _profileLoaded:any = ...mapGetters('profile/profileLoaded')
-    mounted(){
+    async mounted(){
       //вызываю Action
+      //const url : string = 'http://62.109.25.189/rest-img';
+      const url : string = 'https://api.github.com/repos/GerasimGerasimov/movebymap/commits';
+      const username : string = 'gerasim';
+      const token : string = '?';
+      const result : any = '';
+      let data : any = '';
+      try {
+        data = await MainPageImagesController.getImages(url, username, token);
+      } catch (error) {
+        data = error;
+      }
+      console.log('getImages:',data);
       this.fetchData();
       //МЕНЯЮ СТЕЙТ
       //1) фоо=рмирую объект для записи
