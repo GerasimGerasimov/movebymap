@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Carousel :images="slides"/>
-    <RandomSizeCellsGrid :images="slides"/>
+    <RandomSizeCellsGrid :images="MainPageImages"/>
     <BestArtists :images="bestArtists"/>
     <HelloWorld msg="Vue.js + TypeScript"/>
   </div>
@@ -44,10 +44,11 @@ export default class App extends Vue {
     @Getter('email', { namespace }) email: string;
     @Mutation('profileLoaded', { namespace }) profileLoaded: any;
     //private _profileLoaded:any = ...mapGetters('profile/profileLoaded')
+    private MainPageImages: string [] = '';
     async mounted(){
+      console.log('mounted');
       //вызываю Action
-      //const url : string = 'http://62.109.25.189/rest-img';
-      const url : string = 'https://api.github.com/repos/GerasimGerasimov/movebymap/commits';
+      const url : string = 'http://62.109.25.189/rest-img';
       const username : string = 'gerasim';
       const token : string = '?';
       const result : any = '';
@@ -58,6 +59,10 @@ export default class App extends Vue {
         data = error;
       }
       console.log('getImages:',data);
+      this.MainPageImages = data.content.map((item) => 
+        `http://62.109.25.189/imgs/${item.url}`
+      );
+      console.log(this.MainPageImages);
       this.fetchData();
       //МЕНЯЮ СТЕЙТ
       //1) фоо=рмирую объект для записи

@@ -7,28 +7,17 @@ export default class MainPageImagesController {
             console.log('MainPageImagesController:getImages:', url, username, token);
             const header: any = {
                 method: 'GET',
-                // mode: 'cors',
-                // credentials: 'include',
+                mode: 'cors',
+                cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+                credentials: 'same-origin', // include, *same-origin, omit
                 headers: {
-                    'Content-Type': 'application/json;charset=utf-8'
-                    //'Authorization': `Basic ${btoa(`${username}:${token}`)}`,
-                    //'Host': 'http://62.109.25.189',
-                    //'Accept': '*/*',
-                    //'Access-Control-Allow-Origin': 'http://localhost:8081',
-                    //'Access-Control-Allow-Credentials': 'true',
-                    //'Connection': 'keep-alive',
-                    //'cache': 'no-cache',
-                    //"Accept-Encoding": "gzip, deflate"
+                    'Content-Type': 'application/json;charset=utf-8',
+                    'Authorization': `Basic ${btoa(`${username}:${token}`)}`,
                 }
             }
-            let response: any = await fetch(url, header);
-            let data: any = await response.text(); // json();
-            return data;
-            //const data: any = await fetch(url, header);
-            //console.log(data);
-            //return await fetch(url, header)
-            //.then (handledResponse)
-            //.then (validationJSON)
+            return await fetch(url, header)
+                .then (handledResponse)
+                .then (validationJSON)
         } catch (err) {
             console.log(err);
         }
