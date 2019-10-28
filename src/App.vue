@@ -46,7 +46,7 @@ export default class App extends Vue {
     //private _profileLoaded:any = ...mapGetters('profile/profileLoaded')
     private MainPageImages: string [] = '';
     async mounted(){
-      console.log('mounted');
+      //console.log('mounted');
       //вызываю Action
       const url : string = 'http://62.109.25.189/rest-img';
       const username : string = 'gerasim';
@@ -54,15 +54,15 @@ export default class App extends Vue {
       const result : any = '';
       let data : any = '';
       try {
-        data = await MainPageImagesController.getImages(url, username, token);
+        data = await MainPageImagesController.getImagesList(url, username, token);
       } catch (error) {
         data = error;
       }
-      console.log('getImages:',data);
+      //console.log('getImages:',data);
       this.MainPageImages = data.content.map((item) => 
         `http://62.109.25.189/imgs/${item.url}`
       );
-      console.log(this.MainPageImages);
+      //console.log(this.MainPageImages);
       this.fetchData();
       //МЕНЯЮ СТЕЙТ
       //1) фоо=рмирую объект для записи
@@ -70,8 +70,8 @@ export default class App extends Vue {
       //2) теперь с помощью мутации меняю его значени в сторе
       //  2.1) правильный способ вызвать мутацию
           this.profileLoaded(payload);
-          console.log('store:>')
-          console.log(this.$store);
+          //console.log('store:>')
+          //console.log(this.$store);
       // 2.2) ещё один способ вызвать мутацию
       //      указываю namespace в данном случае profile
       //      и имя функции-мутации profileLoaded
@@ -83,9 +83,9 @@ export default class App extends Vue {
       // ЧИТАЮ СТЕЙТ
       // 1) через Getter
       let email = this.email;
-      console.log('email:', email);
+      //console.log('email:', email);
       email = this.$store.state.profile.user.email;
-      console.log('email:', email);
+      //console.log('email:', email);
     }
     private slides: string[] = [
       'https://shop.anseladams.com/v/vspfiles/photos/1701130110-2T.jpg',

@@ -3,7 +3,7 @@ import { ProfileState, User } from './types';
 
 export const mutations: MutationTree<ProfileState> = {
     profileLoaded(state, payload: User) {
-        console.log('mutations:profileLoaded>',payload);
+        //console.log('mutations:profileLoaded>',payload);
         state.error = false;
         state.user = payload;
     },

@@ -26,7 +26,7 @@ export default class BestArtists extends Vue {
     @Prop() private images!: string[];
 
   mounted ():any {
-    console.log(this.images);
+    //console.log(this.images);
   }
 }
 </script>

@@ -2,9 +2,9 @@ import { handledResponse } from '@/errors/errors';
 import { validationJSON} from '@/validators/validator';
 
 export default class MainPageImagesController {
-    public static async getImages(url: string, username: string, token: string) {
+    public static async getImagesList(url: string, username: string, token: string) {
         try {
-            console.log('MainPageImagesController:getImages:', url, username, token);
+            //console.log('MainPageImagesController:getImages:', url, username, token);
             const header: any = {
                 method: 'GET',
                 mode: 'cors',
@@ -17,7 +17,7 @@ export default class MainPageImagesController {
             }
             return await fetch(url, header)
                 .then (handledResponse)
-                .then (validationJSON)
+                .then (validationJSON);
         } catch (err) {
             console.log(err);
         }

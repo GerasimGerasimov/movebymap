@@ -2,9 +2,11 @@
   <div class="banners">
     <div class="slider">
           <img :class="classPrev" :src="srcPrev" alt=""
-              :style="{ animationPlayState: playCtrl}">
+              :style="{ animationPlayState: playCtrl}"
+              v-on:load="onPrevLoad">
           <img :class="classNext" :src="srcNext" alt=""
-              :style="{ animationPlayState: playCtrl}" 
+              :style="{ animationPlayState: playCtrl}"
+              v-on:load="onNextLoad" 
               v-on:animationiteration = "AnimationIteration">       
     </div>
   </div>
@@ -36,6 +38,14 @@ export default class Carousel extends Vue {
   mounted ():any {
     this.srcPrev = this.getNextSlide();
     this.srcNext = this.getNextSlide();
+  }
+
+  private onPrevLoad():void {
+    console.log("onPrevLoad");
+  }
+
+  private onNextLoad():void {
+    console.log("onNextLoad");
   }
 
   private AnimationIteration() {
@@ -78,11 +88,6 @@ export default class Carousel extends Vue {
     height: 300px;
     overflow: hidden;
     position: relative;
-    /*позиционирование по центру*/
-    /*
-    display: flex;
-    justify-content: center;
-    align-items: center;    */
 }
 
 @keyframes prev_animate {
@@ -92,8 +97,10 @@ export default class Carousel extends Vue {
 
 .prev, .next {
   position: absolute;
-  width: 100%;  
-  height: auto;
+  width: 100%; /* Ширина изображений */
+  height: 100%; /* Высота изображении */
+  object-fit: cover; /* Вписываем фотографию в область */
+
 }
 .prev {
     left: 0%;
